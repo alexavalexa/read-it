@@ -34,5 +34,19 @@ namespace ReadIt.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            Book book = BookService.GetById(id);
+            return View(book);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(int id, string title, string author)
+        {
+            bookService.Edit(id, title,author);
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }

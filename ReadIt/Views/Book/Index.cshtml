@@ -29,7 +29,7 @@
                 <td>@book.Title</td>
                 <td>@book.Author</td>
                 <td>
-                    <a asp-action="Edit">
+                    <a asp-action="Edit" asp-route-Id="@book.Id">
                         <button type="button" class="btn btn-warning">Edit</button>
                     </a>
                     <a asp-action="Delete">

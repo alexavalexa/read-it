@@ -19,5 +19,17 @@ namespace ReadIt.Services
         {
             return Data.Books;
         }
+
+        public Book Edit(int id, string title, string author)
+        {
+            Book book = GetById(id);
+            book.Title = title;
+            book.Author = author;
+            return book;
+        }
+        public static Book GetById(int id)
+        {
+            return Data.Books.FirstOrDefault(p => p.Id == id);
+        }
     }
 }
