@@ -6,19 +6,25 @@ using System.Threading.Tasks;
 
 namespace ReadIt.Services
 {
-    public class BookService
+    public class BookService : IBookService
     {
+        private IData data;
+        public BookService(IData data)
+        {
+            this.data = data;
+        }
+        public List<Book> GetAll()
+        {
+            return data.Books;
+        }
+
         public Book Add(string title, string author)
         {
             Book book = new Book(title, author);
-            Data.Books.Add(book);
+            data.Books.Add(book);
             return book;
         }
 
-        public List<Book> GetAll()
-        {
-            return Data.Books;
-        }
 
         public Book Edit(int id, string title, string author)
         {
@@ -27,9 +33,17 @@ namespace ReadIt.Services
             book.Author = author;
             return book;
         }
-        public static Book GetById(int id)
+        public Book Delete(int id)
         {
-            return Data.Books.FirstOrDefault(p => p.Id == id);
+            Book book = GetById(id);
+            data.Books.Remove(book);
+            return book;
         }
+
+        public  Book GetById(int id)
+        {
+            return data.Books.FirstOrDefault(p => p.Id == id);
+        }
+
     }
 }

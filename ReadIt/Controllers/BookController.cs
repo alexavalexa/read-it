@@ -10,8 +10,8 @@ namespace ReadIt.Controllers
 {
     public class BookController : Controller
     {
-        private BookService bookService;
-        public BookController(BookService bookService)
+        private IBookService bookService;
+        public BookController(IBookService bookService)
         {
             this.bookService = bookService;
         }
@@ -37,7 +37,7 @@ namespace ReadIt.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            Book book = BookService.GetById(id);
+            Book book = bookService.GetById(id);
             return View(book);
         }
 
@@ -45,6 +45,22 @@ namespace ReadIt.Controllers
         public IActionResult Edit(int id, string title, string author)
         {
             bookService.Edit(id, title,author);
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            Book book = bookService.GetById(id);
+
+            return View(book);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteConfirm(int id)
+        {
+            bookService.Delete(id);
+
             return RedirectToAction(nameof(Index));
         }
 
