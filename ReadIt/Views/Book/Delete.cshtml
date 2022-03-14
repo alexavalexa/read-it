@@ -1,0 +1,23 @@
+﻿@model Book
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<form asp-action="DeleteConfirm" asp-route-Id="@Model.Id">
+    <div class="form-group">
+        <label for="book's title'">Title</label>
+        <input type="text" class="form-control" name="title" value="@Model.Title" disabled>
+    </div>
+    <div class="form-group">
+        <label for="book's author'">Author</label>
+        <input type="text" class="form-control" name="author" value="@Model.Author" disabled>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a asp-action="Index" asp-controller="Book">
+            <button type="button" class="btn btn-secondary">Cancel</button>
+        </a>
+    </div>
+</form>
